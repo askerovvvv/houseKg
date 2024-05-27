@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: houseKg
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/houseKg
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
