@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
-public class CustomValidator<T> {
+public class CustomValidatorImpl<T> implements CustomValidator<T>{
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
