@@ -3,15 +3,13 @@ package org.example.housekg.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.housekg.exceptions.CustomValidationException;
 import org.example.housekg.exceptions.ObjectNotFoundException;
-import org.example.housekg.mapper.BaseMapper;
 import org.example.housekg.mapper.NumberOfRoomMapper;
-import org.example.housekg.models.dto.BaseDto;
 import org.example.housekg.models.dto.CustomValidationErrorDto;
 import org.example.housekg.models.dto.NumberOfRoomDto;
 import org.example.housekg.models.entity.NumberOfRoom;
 import org.example.housekg.repository.NumberOfRoomRepository;
 import org.example.housekg.service.NumberOfRoomService;
-import org.example.housekg.validator.CustomValidator;
+import org.example.housekg.validator.CustomValidatorImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +20,7 @@ import java.util.List;
 public class NumberOfRoomServiceImpl implements NumberOfRoomService {
 
     private final NumberOfRoomRepository numberOfRoomRepository;
-    private final CustomValidator<NumberOfRoomDto> numberOfRoomDtoValidator;
+    private final CustomValidatorImpl<NumberOfRoomDto> numberOfRoomDtoValidator;
 
     @Override
     public List<NumberOfRoomDto> findAllNumberOfRooms() {
@@ -44,6 +42,12 @@ public class NumberOfRoomServiceImpl implements NumberOfRoomService {
     public NumberOfRoomDto findNumberOfRoomById(Long id) {
         return NumberOfRoomMapper.INSTANCE.toNumberOfRoomDto(numberOfRoomRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Number of rooms was not found")));
+    }
+
+    @Override
+    public NumberOfRoom findNumberOfRoomByIdAndReturnEntity(Long id) {
+        return numberOfRoomRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Number of rooms was not found"));
     }
 
     @Override
